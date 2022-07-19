@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<any>(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`)
   }
 
-  getCurrencyById() {
-
+  getCurrencyById(coinId: string) {
+    return this.http.get<any>(`https://api.coingecko.com/api/v3/coins/${coinId}`)
   }
 }
