@@ -9,13 +9,17 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { CoinListComponent } from './components/coin-list/coin-list.component';
+import { CoinDetailComponent } from './components/coin-detail/coin-detail.component';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CoinListComponent,
+    CoinDetailComponent
   ],
   imports: [
     BrowserModule,
