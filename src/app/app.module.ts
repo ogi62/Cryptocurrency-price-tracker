@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { CoinListComponent } from './components/coin-list/coin-list.component';
 import { CoinDetailComponent } from './components/coin-detail/coin-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 
 
@@ -31,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
