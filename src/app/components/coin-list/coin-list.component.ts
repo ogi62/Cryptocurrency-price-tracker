@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-coin-list',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoinListComponent implements OnInit {
 
-  constructor() { }
+  bannerData:any;
+
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.getAllData();
+    this.getBannerData();
+  }
+
+  getBannerData() {
+    this.api.getTrendingCurrency('INR').subscribe((res)=> {
+      console.log('dataALOOOOO',res);
+      this.bannerData = res;
+    })
+  }
+
+  getAllData() {
+    this.api.getCurrency('INR').subscribe((res)=> {
+      console.log(res);
+    })
   }
 
 }
