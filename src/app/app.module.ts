@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { CoinListComponent } from './components/coin-list/coin-list.component';
 import { CoinDetailComponent } from './components/coin-detail/coin-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -29,7 +30,8 @@ import { CoinDetailComponent } from './components/coin-detail/coin-detail.compon
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
