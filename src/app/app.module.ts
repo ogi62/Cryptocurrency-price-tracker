@@ -14,6 +14,7 @@ import { CoinDetailComponent } from './components/coin-detail/coin-detail.compon
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -37,7 +38,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FormsModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
