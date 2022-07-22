@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { ChartConfiguration, ChartType} from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CurrencyService } from 'src/app/service/currency.service';
 
 @Component({
   selector: 'app-coin-detail',
@@ -12,8 +13,8 @@ import { BaseChartDirective } from 'ng2-charts';
 export class CoinDetailComponent implements OnInit {
   coinData: any;
   coinId!: string;
-  days!: number;
-  currency!: string;
+  days = 30;
+  currency = 'INR';
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
@@ -46,7 +47,8 @@ export class CoinDetailComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private currencyService: CurrencyService
   ) {}
 
   ngOnInit(): void {
@@ -54,17 +56,29 @@ export class CoinDetailComponent implements OnInit {
       this.coinId = val['id'];
     });
     this.getCoinData();
-    this.getGraphData();
+    this.getGraphData(this.days);
+    this.currencyService.getCurrency().subscribe((res)=> {
+      this.currency = res;
+      this.getGraphData(this.days);
+      this.getCoinData();
+    })
   }
 
   getCoinData() {
     this.api.getCurrencyById(this.coinId).subscribe((res) => {
+      if(this.currency === 'USD') {
+        res.market_data.current_price.inr = res.market_data.current_price.usd;
+        res.market_data.market_cap.inr = res.market_data.market_cap.usd;
+      }
+      res.market_data.current_price.inr = res.market_data.current_price.inr;
+      res.market_data.market_cap.inr = res.market_data.market_cap.inr;
       this.coinData = res;
     });
   }
 
-  getGraphData() {
-    this.api.getGraphicalCurrencyData(this.coinId, 'INR', 30).subscribe((res)=> {
+  getGraphData(days: number) {
+    this.days = days;
+    this.api.getGraphicalCurrencyData(this.coinId, this.currency, this.days).subscribe((res)=> {
       setTimeout(()=> {
         this.myLineChart.chart?.update();
       },200)
